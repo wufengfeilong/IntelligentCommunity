@@ -73,10 +73,9 @@ public class NeighbourFragment extends Fragment {
 
     void initData() {
         //图标
-        int icno[] = {R.drawable.notice, R.drawable.news, R.drawable.pay,
-                R.drawable.trouble};
+        int icno[] = {R.drawable.notice, R.drawable.news, R.drawable.pay, R.drawable.pay};
         //图标下的文字
-        String name[] = {"邻里圈子", "社区活动", "挪车信息", "二手闲置"};
+        String name[] = {"企业圈子", "挪车信息", "二手闲置","招聘信息"};
         dataList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < icno.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();

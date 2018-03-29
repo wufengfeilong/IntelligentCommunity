@@ -81,9 +81,10 @@ public class PropertyFragment extends Fragment {
         //图标
         int icno[] = {R.drawable.notice, R.drawable.news, R.drawable.activity,
                 R.drawable.pay, R.drawable.trouble, R.drawable.advice,
-                R.drawable.rent};
+                R.drawable.rent, R.drawable.pay};
         //图标下的文字
-        String name[] = {"园区公告", "园区新闻", "园区活动", "物业缴费", "故障报修", "投诉建议", "房屋租售"};
+        String name[] = {"园区公告", "园区新闻", "园区活动", "缴费中心",
+                "故障报修", "投诉建议", "房屋租售","入驻企业"};
         dataList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < icno.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();

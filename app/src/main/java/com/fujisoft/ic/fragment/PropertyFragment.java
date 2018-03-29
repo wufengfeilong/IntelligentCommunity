@@ -1,30 +1,95 @@
 package com.fujisoft.ic.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.fujisoft.ic.R;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class PropertyFragment extends Fragment {
-    public static PropertyFragment newInstance(String param1) {
+    //    private Context mContext;
+    @BindView(R.id.property_gv)
+    GridView propertyGv;
+    Unbinder unbinder;
+    private List<Map<String, Object>> dataList;
+    private SimpleAdapter adapter;
+
+    public PropertyFragment newInstance(Context context) {
         PropertyFragment fragment = new PropertyFragment();
-        Bundle args = new Bundle();
-        args.putString("agrs1", param1);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putString("agrs1", param1);
+//        fragment.setArguments(args);
+//        mContext = context;
         return fragment;
+    }
+
+    public static PropertyFragment newInstance() {
+        return new PropertyFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.property_fragment, container, false);
-        Bundle bundle = getArguments();
-        String agrs1 = bundle.getString("agrs1");
-        TextView tv = (TextView)view.findViewById(R.id.container);
-        tv.setText(agrs1);
+//        Bundle bundle = getArguments();
+//        String agrs1 = bundle.getString("agrs1");
+//        TextView tv = (TextView)view.findViewById(R.id.container);
+//        tv.setText(agrs1);
+        unbinder = ButterKnife.bind(this, view);
+        //初始化数据
+        initData();
+        String[] from = {"img", "text"};
+
+        int[] to = {R.id.img, R.id.text};
+
+        adapter = new SimpleAdapter(getActivity(), dataList, R.layout.gridview_item, from, to);
+
+        propertyGv.setAdapter(adapter);
+
+        propertyGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+
+
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    void initData() {
+        //图标
+        int icno[] = {R.drawable.notice, R.drawable.news, R.drawable.activity,
+                R.drawable.pay, R.drawable.trouble, R.drawable.advice,
+                R.drawable.rent};
+        //图标下的文字
+        String name[] = {"园区公告", "园区新闻", "园区活动", "物业缴费", "故障报修", "投诉建议", "房屋租售"};
+        dataList = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < icno.length; i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("img", icno[i]);
+            map.put("text", name[i]);
+            dataList.add(map);
+        }
     }
 }

@@ -43,9 +43,9 @@ public class IndexActivity extends AppCompatActivity {
     }
 
     private void initJPTabBar() {
-        tabbar.setTitles("邻里", "物业", "消息", "我的")
-                .setNormalIcons(R.drawable.neighbour, R.drawable.property, R.drawable.star, R.drawable.myhead)
-                .setSelectedIcons(R.drawable.neighbour_selected, R.drawable.property_selected, R.drawable.star_selected, R.drawable.myhead_selected)
+        tabbar.setTitles("物业", "企业", "商家", "我的")
+                .setNormalIcons(R.drawable.property, R.drawable.neighbour, R.drawable.star, R.drawable.myhead)
+                .setSelectedIcons(R.drawable.property_selected, R.drawable.neighbour_selected, R.drawable.star_selected, R.drawable.myhead_selected)
                 .generate();
 
         tabbar.setTabListener(new OnTabSelectListener() {
@@ -56,20 +56,20 @@ public class IndexActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fm.beginTransaction();
                 switch (i) {
                     case 0:
+                        if (propertyFragment == null) {
+                            propertyFragment = PropertyFragment.newInstance();
+                        }
+                        transaction.replace(R.id.fragment_content, propertyFragment);
+                        break;
+                    case 1:
                         if (neighbourFragment == null) {
                             neighbourFragment = NeighbourFragment.newInstance("邻里");
                         }
                         transaction.replace(R.id.fragment_content, neighbourFragment);
                         break;
-                    case 1:
-                        if (propertyFragment == null) {
-                            propertyFragment = PropertyFragment.newInstance("物业");
-                        }
-                        transaction.replace(R.id.fragment_content, propertyFragment);
-                        break;
                     case 2:
                         if (newsFragment == null) {
-                            newsFragment = NewsFragment.newInstance("消息");
+                            newsFragment = NewsFragment.newInstance("商家");
                         }
                         transaction.replace(R.id.fragment_content, newsFragment);
                         break;
@@ -110,8 +110,8 @@ public class IndexActivity extends AppCompatActivity {
     private void setMainFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        neighbourFragment = NeighbourFragment.newInstance("邻里");
-        transaction.replace(R.id.fragment_content, neighbourFragment);
+        propertyFragment = PropertyFragment.newInstance();
+        transaction.replace(R.id.fragment_content, propertyFragment);
         transaction.commit();
     }
 }

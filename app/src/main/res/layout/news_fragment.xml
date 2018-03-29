@@ -8,7 +8,7 @@
 
     <TextView
             android:id="@+id/container"
-            android:text="消息"
+            android:text="商家"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

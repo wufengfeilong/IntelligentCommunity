@@ -9,7 +9,11 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fujisoft.ic.R;
@@ -21,6 +25,7 @@ import com.fujisoft.ic.util.AppBarUtil;
 import com.fujisoft.ic.util.GlideImageLoader;
 import com.jpeng.jptabbar.JPTabBar;
 import com.jpeng.jptabbar.OnTabSelectListener;
+import com.maning.library.SwitcherView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -40,7 +45,13 @@ public class IndexActivity extends AppCompatActivity {
     @BindView(R.id.appbarl)
     AppBarLayout appbarl;
     @BindView(R.id.fragment_content)
-    NestedScrollView fragmentContent;
+    FrameLayout fragmentContent;
+    @BindView(R.id.switcherView)
+    SwitcherView switcherView;
+    @BindView(R.id.nestedscrollview)
+    NestedScrollView nestedscrollview;
+    @BindView(R.id.headline_ll)
+    LinearLayout headlineLl;
     private NeighbourFragment neighbourFragment;
     private PropertyFragment propertyFragment;
     private NewsFragment newsFragment;
@@ -55,8 +66,31 @@ public class IndexActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
         initBanner();
+        initHeadLine();
         initJPTabBar();
         setMainFragment();
+    }
+
+    private void initHeadLine() {
+        ArrayList<String> strs = new ArrayList<>();
+        strs.add("习近平举行仪式欢迎纳米比亚总统访华");
+        strs.add("企办智慧园区 官方指定智慧园区解决方案服务平");
+        strs.add("从\"领导小组\"到\"委员会\":全面深化改革进入新阶段");
+        strs.add("国务院继续深化减税降费政策：企业减税再出利好");
+
+        //设置数据源
+        switcherView.setResource(strs);
+        //开始滚动
+        switcherView.startRolling();
+
+        //监听点击事件
+        switcherView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //获取当前的展示的值
+                Toast.makeText(IndexActivity.this, switcherView.getCurrentItem(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initView() {
@@ -83,6 +117,7 @@ public class IndexActivity extends AppCompatActivity {
                         }
                         setAppBarScroll(true);
                         titleTv.setText(R.string.app_name);
+                        headlineLl.setVisibility(View.VISIBLE);
                         transaction.replace(R.id.fragment_content, propertyFragment);
                         break;
                     case 1:
@@ -91,6 +126,7 @@ public class IndexActivity extends AppCompatActivity {
                         }
                         setAppBarScroll(true);
                         titleTv.setText(R.string.app_name);
+                        headlineLl.setVisibility(View.VISIBLE);
                         transaction.replace(R.id.fragment_content, neighbourFragment);
                         break;
                     case 2:
@@ -99,15 +135,17 @@ public class IndexActivity extends AppCompatActivity {
                         }
                         setAppBarScroll(true);
                         titleTv.setText(R.string.market);
+                        headlineLl.setVisibility(View.GONE);
                         transaction.replace(R.id.fragment_content, newsFragment);
                         break;
                     case 3:
                         if (myFragment == null) {
                             myFragment = MyFragment.newInstance("我的");
                         }
+                        setAppBarScroll(false);
                         titleTv.setText(R.string.mine);
                         appbarl.setExpanded(false);
-                        setAppBarScroll(false);
+                        headlineLl.setVisibility(View.GONE);
                         transaction.replace(R.id.fragment_content, myFragment);
                         break;
                     default:
@@ -146,7 +184,7 @@ public class IndexActivity extends AppCompatActivity {
 
     private void setAppBarScroll(boolean flg) {
         appBarUtil.forbidAppBarScroll(!flg);
-        fragmentContent.setNestedScrollingEnabled(flg);
+        nestedscrollview.setNestedScrollingEnabled(flg);
     }
 
 }

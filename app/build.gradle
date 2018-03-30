@@ -32,5 +32,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     compile 'com.jpeng:JPTabBar:1.4.0'
+    compile 'com.github.maning0303:SwitcherView:v1.0.0'
     testCompile 'junit:junit:4.12'
 }

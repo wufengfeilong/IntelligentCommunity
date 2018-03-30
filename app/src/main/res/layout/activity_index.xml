@@ -43,10 +43,40 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
-            android:id="@+id/fragment_content"
+            android:id="@+id/nestedscrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#d7d4e1d8"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+        >
+            <LinearLayout
+                    android:id="@+id/headline_ll"
+                    android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="#ffffff"
+                          android:orientation="horizontal">
+                <ImageView android:layout_width="80dp"
+                           android:layout_height="24dp"
+                           android:src="@drawable/headline"/>
+                <com.maning.library.SwitcherView
+                        android:id="@+id/switcherView"
+                        android:layout_width="match_parent"
+                        android:paddingTop="2dp"
+                        android:layout_height="24dp"
+                        app:switcherRollingTime="3000"
+                        app:switcherTextSize="5sp"
+                        app:switcherTextColor="@android:color/black"/>
+            </LinearLayout>
+            <FrameLayout
+                    android:id="@+id/fragment_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+            </FrameLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
     <RelativeLayout android:layout_width="match_parent"

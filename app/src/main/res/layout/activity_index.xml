@@ -64,7 +64,7 @@
                 <com.maning.library.SwitcherView
                         android:id="@+id/switcherView"
                         android:layout_width="match_parent"
-                        android:paddingTop="2dp"
+                        android:paddingTop="1dp"
                         android:layout_height="24dp"
                         app:switcherRollingTime="3000"
                         app:switcherTextSize="5sp"

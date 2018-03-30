@@ -2,17 +2,23 @@ package com.fujisoft.ic.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.fujisoft.ic.R;
+import com.fujisoft.ic.activity.NoticeActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,11 +66,28 @@ public class PropertyFragment extends Fragment {
         propertyGv.setAdapter(adapter);
 
         propertyGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+            public void onItemClick(AdapterView<?> arg0, View view, int pos,
                                     long arg3) {
+                TextView tv = view.findViewById(R.id.text);
+                Intent intent= null;
+                switch (pos){
+                    case 0:
+                        intent = new Intent(getActivity(), NoticeActivity.class);
+                        break;
+                    case 1:
+                        intent = new Intent(getActivity(), NoticeActivity.class);
+                        break;
 
+                        default:
+                            break;
 
+                }
+//                ActivityOptionsCompat optionsCompat =
+//                        ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), tv, "GV_TITLE");
+//                getActivity().startActivity(intent,optionsCompat.toBundle());
+                startActivity(intent);
             }
         });
 

@@ -4,4 +4,6 @@
     <string name="property">物业</string>
     <string name="company">企业</string>
     <string name="market">商家</string>
+    <string name="park_notice">园区公告</string>
+    <string name="gv_title">GV_TITLE</string>
 </resources>
